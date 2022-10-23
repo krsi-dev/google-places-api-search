@@ -186,7 +186,6 @@ def main():
     
     # Parse arguments
     args = parser.parse_args()
-    print(f"{args} HELLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
 
     # Google maps client
     client = googlemaps.Client(args.google_api_key)
