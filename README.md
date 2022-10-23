@@ -1,4 +1,6 @@
-# google-maps-api-official
+# google places api search
+
+Build a tool to search for places using the official API and output the results to TSV.
 
 ```bash
 # use gooey and open GUI
