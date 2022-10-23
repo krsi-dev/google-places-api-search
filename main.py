@@ -2,26 +2,16 @@ import os
 import json
 import csv
 import time 
-import gooey
 import dotenv
 import textwrap
+import argparse
 import googlemaps
 
 dotenv.load_dotenv()
 
-"""
-Main application with Gooey
-to switch from CLI use --ignore-gooey
-"""
-@gooey.Gooey(
-    # GUI setup
-    program_name=f"google-places-api-search",
-    required_cols=1,
-    default_size=(400, 800),
-)
 def main():
     # Gooey parser
-    parser = gooey.GooeyParser()
+    parser = argparse.ArgumentParser(description='Process some integers.')
 
     # Required argument API key
     # key can be found in credentials
@@ -66,7 +56,6 @@ def main():
     # filter the search results with valid place types
     # i.e restaurant accounting
     parser.add_argument('--places_type', 
-        widget='Dropdown',
         type=str,
 
         default=os.environ.get("PLACES_TYPE"),
@@ -219,7 +208,7 @@ def main():
     
         result_counter = 0
         # if counter is less than max results
-        while result_counter != client_max_results:
+        while result_counter < client_max_results:
     
             if not page_token and result_counter == 0:            
                 # search for places
