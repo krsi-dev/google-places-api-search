@@ -343,6 +343,7 @@ def main():
                 
                 # finally write the rows
                 tsv_write.writerow(tsv_fields)
+                tsv.flush()
 
         # end
         tsv.close()
