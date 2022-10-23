@@ -15,7 +15,7 @@ to switch from CLI use --ignore-gooey
 """
 @gooey.Gooey(
     # GUI setup
-    program_name=f"google-maps-api-with-apify",
+    program_name=f"google-places-api-search",
     required_cols=1,
     default_size=(400, 800),
 )
@@ -194,10 +194,6 @@ def main():
         ["geometry"]["location"]
 
     
-    
-    # Container for resultsclear
-    places = []
-
     # token for getting the next results
     page_token = False
 
@@ -220,11 +216,12 @@ def main():
             "Sunday Hours"
         ])
     
-        # if container is less than max results
+    
         result_counter = 0
+        # if counter is less than max results
         while result_counter != client_max_results:
     
-            if not page_token and len(places) <= 0:            
+            if not page_token and result_counter == 0:            
                 # search for places
                 data = client.places(
 
