@@ -246,6 +246,9 @@ def main():
 
                 # search for places using the next page
                 data = client.places(page_token=page_token)
+
+                # assign next page token
+                page_token = data.get("next_page_token")
             
             else:
                 # break the loop
@@ -278,7 +281,6 @@ def main():
                 )
 
                 # place details
-                place = data["result"]
                 print(f"{result_counter}: {place['name']}")
 
                 # write initial fields 
@@ -314,19 +316,18 @@ def main():
                         try:
                             period = opening_hours["periods"][index]
                             
-                            
                             # get opening closing periods
-                            _open = period["open"]
-                            _close = period["close"]
+                            _open = period.get("open")
+                            _close = period.get("close")
                             
 
                             # 2200 -> 22:00
-                            opening_hour = ":".join(textwrap.wrap(_open["time"], 2))
-                            closing_hour = ":".join(textwrap.wrap(_close["time"], 2))
+                            opening_hour = ":".join(textwrap.wrap(_open.get("time"), 2)) 
+                            closing_hour = ":".join(textwrap.wrap(_close.get("time"), 2)) 
 
                             opening_fields.append(f"{opening_hour} - {closing_hour}")
                         
-                        except IndexError:
+                        except Exception:
                             # Fallback if index of day
                             # does not exist
                             opening_fields.append("n/a")
